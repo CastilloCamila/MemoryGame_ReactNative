@@ -15,12 +15,18 @@ function Card({ children, index, isTurnedOver }) {
   return (
     <View style={style.cardContainer}>
       <View style={style.cardInner}>
-        <View style={style.card}>
-          <Pressable onPress={() => handleOnPress(index)} style={[style.card, isTurnedOver?style.cardBack:""]}>
+        <View style={[style.card, isTurnedOver ? style.transition : ""]}>
+          <Pressable onPress={() => handleOnPress(index)} style={[style.card]}>
             <Text style={style.text}>?</Text>
           </Pressable>
         </View>
-        <View style={[style.card, isTurnedOver?"":style.cardBack]}>
+        <View
+          style={[
+            style.card,
+            style.cardBack,
+            isTurnedOver ? "" : style.transition,
+          ]}
+        >
           <Pressable onPress={() => handleOnPress(index)}>
             <Text style={style.text}>{children}</Text>
           </Pressable>
@@ -39,21 +45,18 @@ const style = StyleSheet.create({
     margin: 4,
   },
   cardInner: {
-    position: 'relative',,
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    transition: 'transform 0.8s',
-    transformmtyle
-    :' preserve-3d',
-
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    textAlign: "center",
+    transition: "transform 0.8s",
+    transformmtyle: " preserve-3d",
   },
   cardBack: {
     borderColor: "#782CF7",
     borderWidth: 5,
-    transform: 'rotateY(180deg)',
   },
-
+  transition: { transform: "rotateY(180deg)" },
   card: {
     backgroundColor: "#370073",
     borderRadius: 10,
@@ -67,7 +70,7 @@ const style = StyleSheet.create({
   },
 
   text: {
-    position: "absolute",
+
     color: "#fff",
     fontSize: 25,
     textAlign: "center",

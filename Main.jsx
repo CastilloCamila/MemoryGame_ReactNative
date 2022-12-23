@@ -41,8 +41,8 @@ function Main() {
       {!playerWin() ? (
         <></>
       ) : (
-        <Button onPress={() => resetGame()} title="Reset Game" />
-      )}
+        <></>
+      )}<Button color="#370073" onPress={() => resetGame()} title="Reset Game" />
     </View>
   );
 }
@@ -62,7 +62,7 @@ const style = StyleSheet.create({
   text: {
     color: "#fff",
     fontSize: 20,
-  },
+  }
 });
 
 export default Main;
