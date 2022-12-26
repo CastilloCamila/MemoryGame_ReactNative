@@ -50,7 +50,7 @@ const style = StyleSheet.create({
     height: "100%",
     textAlign: "center",
     transition: "transform 0.8s",
-    transformmtyle: " preserve-3d",
+    transformmStyle: " preserve-3d",
   },
   cardBack: {
     borderColor: "#782CF7",

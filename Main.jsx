@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { View, StyleSheet, Text, Button } from "react-native";
+import React, { useContext, useEffect, useRef } from "react";
+import { View, StyleSheet, Text, Button, Animated, Pressable } from "react-native";
 import Constants from "expo-constants";
 import Cards from "./src/components/Cards";
 import { Context } from "./src/context/context";
+import ConfettiExplosion from "react-confetti-explosion";
 
 function Main() {
   const {
@@ -31,19 +32,31 @@ function Main() {
     setMachedCards([]);
     setMoves(0);
   };
+
   return (
     <View style={style.container}>
-      <Text style={style.title}>
-        {playerWin() ? "Congratulations🎊!!" : "Memory Game"}
-      </Text>
-      <Text style={style.text}>Moves :{moves}</Text>
+      <View style={style.textContainer}>
+        <Text style={style.title}>
+          {playerWin() ? (
+            <>
+              Congratulations!!{" "}
+              <View style={style.Containerconfetti}>
+             
+                <ConfettiExplosion />
+              </View>
+            </>
+          ) : (
+            "Memory Game"
+          )}
+        </Text>
+      </View>
+      <Text style={style.text}>Moves: {moves}</Text>
       <Cards />
-      {!playerWin() ? (
-        <></>
-      ) : (
-        <></>
-      )}<Button color="#370073" onPress={() => resetGame()} title="Reset Game" />
-    </View>
+      {!playerWin() ? <></> : <></>}
+      <Pressable style={style.button} onPress={() => resetGame()}>
+        <Text style={{color:'#fff'}}>Reset Game</Text>
+    
+    </Pressable></View>
   );
 }
 const style = StyleSheet.create({
@@ -58,11 +71,36 @@ const style = StyleSheet.create({
   title: {
     color: "#fff",
     fontSize: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
+    display: "flex",
     color: "#fff",
     fontSize: 20,
+    justifyContent: "center",
+  },
+  textContainer: {
+    position: "relative",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  Containerconfetti: {
+    height: "100%",
+    width: "100%", 
+    position:'absolute',
+    justifyContent: "center",
+    alignItems:'center',
+   left:0,
+   zIndex:'99999999999'
+  },button:{
+    zIndex:-10,
+    backgroundColor:'#370073',
+    borderRadius:4,
+    padding:10
+
   }
+  
 });
 
 export default Main;
