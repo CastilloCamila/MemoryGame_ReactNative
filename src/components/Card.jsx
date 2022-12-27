@@ -5,29 +5,39 @@ import { Context } from "../context/context";
 function Card({ children, index, isTurnedOver }) {
   const { setMoves, moves, setSelectedCards, selectedCards } =
     useContext(Context);
-
+useEffect(()=>{
+  console.log("renderizado")
+},[])
   const handleOnPress = (index) => {
-    if (selectedCards.length >= 2 || selectedCards.includes(index)) return;
-    setSelectedCards([...selectedCards, index]);
-    setMoves(moves + 1);
+    requestAnimationFrame(() => {
+       if (selectedCards.length >= 2 || selectedCards.includes(index)) return;
+      setSelectedCards([...selectedCards, index]);
+      setMoves(moves + 1);
+    });
   };
 
   return (
     <View style={style.cardContainer}>
       <View style={style.cardInner}>
-        <View style={[style.card, isTurnedOver ? style.transition : ""]}>
-          <Pressable onPress={() => handleOnPress(index)} style={[style.card]}>
+        <View
+          style={[
+            style.card,
+            isTurnedOver && { transform: [{ rotateY: "180deg" }] },
+          ]}
+        >
+          <Pressable onPressIn={() => handleOnPress(index)} style={[style.card]}>
             <Text style={style.text}>?</Text>
           </Pressable>
         </View>
+
         <View
           style={[
             style.card,
             style.cardBack,
-            isTurnedOver ? "" : style.transition,
+            !isTurnedOver && { transform: [{ rotateY: "180deg" }] },
           ]}
         >
-          <Pressable onPress={() => handleOnPress(index)}>
+          <Pressable onPressIn={() => handleOnPress(index)}>
             <Text style={style.text}>{children}</Text>
           </Pressable>
         </View>
@@ -37,8 +47,8 @@ function Card({ children, index, isTurnedOver }) {
 }
 const style = StyleSheet.create({
   cardContainer: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     perspective: "400",
     justifyContent: "center",
     alignItems: "center",
@@ -56,11 +66,11 @@ const style = StyleSheet.create({
     borderColor: "#782CF7",
     borderWidth: 5,
   },
-  transition: { transform: "rotateY(180deg)" },
+  // transition: { transform: [{rotateY:"(180deg)"}] },
   card: {
     backgroundColor: "#370073",
     borderRadius: 10,
-    transition: " transform 1s",
+    transition: " transform 0.8s",
     height: "100%",
     width: "100%",
     justifyContent: "center",
@@ -70,11 +80,9 @@ const style = StyleSheet.create({
   },
 
   text: {
-
     color: "#fff",
     fontSize: 25,
     textAlign: "center",
-    transition: " 1s",
   },
 });
 

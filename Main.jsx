@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, Button, Animated, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Pressable
+} from "react-native";
 import Constants from "expo-constants";
 import Cards from "./src/components/Cards";
 import { Context } from "./src/context/context";
-import ConfettiExplosion from "react-confetti-explosion";
+import ConfettiCannon from "react-native-confetti-cannon";
 
 function Main() {
   const {
@@ -24,7 +29,7 @@ function Main() {
     } else {
       const timeOut = setTimeout(() => {
         setSelectedCards([]);
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timeOut);
     }
   }, [selectedCards]);
@@ -32,18 +37,24 @@ function Main() {
     setMachedCards([]);
     setMoves(0);
   };
-
+  useEffect(()=>{
+    console.log("renderizado")
+  },[])
   return (
     <View style={style.container}>
       <View style={style.textContainer}>
         <Text style={style.title}>
           {playerWin() ? (
             <>
-              Congratulations!!{" "}
-              <View style={style.Containerconfetti}>
+              Congratulations!!
+
+                <ConfettiCannon
+                  count={200}
+                  origin={{ x: -10, y: 0 }}
+                  fadeOut={true}
+                  explosionSpeed={600}
+                />
              
-                <ConfettiExplosion />
-              </View>
             </>
           ) : (
             "Memory Game"
@@ -52,11 +63,14 @@ function Main() {
       </View>
       <Text style={style.text}>Moves: {moves}</Text>
       <Cards />
-      {!playerWin() ? <></> : <></>}
-      <Pressable style={style.button} onPress={() => resetGame()}>
-        <Text style={{color:'#fff'}}>Reset Game</Text>
-    
-    </Pressable></View>
+      {!playerWin() ? (
+        <></>
+      ) : (
+        <Pressable style={style.button} onPress={() => resetGame()}>
+          <Text style={{ color: "#fff" }}>Reset Game</Text>
+        </Pressable>
+      )}
+    </View>
   );
 }
 const style = StyleSheet.create({
@@ -85,22 +99,19 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  Containerconfetti: {
+  containerconfetti: {
     height: "100%",
-    width: "100%", 
-    position:'absolute',
+    width: "100%",
+    position: "absolute",
     justifyContent: "center",
-    alignItems:'center',
-   left:0,
-   zIndex:'99999999999'
-  },button:{
-    zIndex:-10,
-    backgroundColor:'#370073',
-    borderRadius:4,
-    padding:10
-
-  }
-  
+    alignItems: "center",
+    left: 0,
+  },
+  button: {
+    backgroundColor: "#370073",
+    borderRadius: 4,
+    padding: 10,
+  },
 });
 
 export default Main;
