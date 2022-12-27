@@ -32,7 +32,6 @@ function Main() {
   }, [selectedCards]);
 
   const resetGame = () => {
-    console.log("entre");
     setmatchedCards([]);
     setMoves(0);
   };

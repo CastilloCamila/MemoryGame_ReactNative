@@ -6,9 +6,6 @@ function Card({ children, index, isTurnedOver }) {
   const animatedValue = useRef(new Animated.Value(0)).current;
   const { setMoves, moves, setSelectedCards, selectedCards, matchedCards } =
     useContext(Context);
-  useEffect(() => {
-    console.log("renderizado");
-  }, []);
   const handleOnPress = (index) => {
     if (selectedCards.length >= 2 || selectedCards.includes(index)) {
     }
