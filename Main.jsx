@@ -16,9 +16,8 @@ function Main() {
     selectedCards,
     setSelectedCards,
   } = useContext(Context);
-  const playerWin = () =>true // machedCards.length == boardCards.length
-  
-  
+  const playerWin = () => machedCards.length == boardCards.length;
+
   useEffect(() => {
     if (selectedCards.length < 2) return;
     if (boardCards[selectedCards[0]] == boardCards[selectedCards[1]]) {
@@ -27,30 +26,34 @@ function Main() {
     } else {
       const timeOut = setTimeout(() => {
         setSelectedCards([]);
-      }, 500);
+      }, 1000);
       return () => clearTimeout(timeOut);
     }
   }, [selectedCards]);
+
   const resetGame = () => {
+    console.log("entre")
     setMachedCards([]);
     setMoves(0);
   };
 
   return (
     <View style={style.container}>
-      {playerWin() ? (<View style={style.containerconfetti}>
-        <ConfettiCannon
-          count={200}
-          origin={{ x: -10, y: 0 }}
-          explosionSpeed={200}
-          ref={(ref) => (explosion = ref)}
-        /></View >
+      {playerWin() ? (
+        <View style={style.containerconfetti}>
+          <ConfettiCannon
+            count={200}
+            origin={{ x: -10, y: 0 }}
+            explosionSpeed={200}
+            ref={(ref) => (explosion = ref)}
+          />
+        </View>
       ) : (
         <></>
       )}
       <View style={style.textContainer}>
         <Text style={style.title}>
-          {playerWin() ? <>Congratulations!!</> : "Memory Game"}
+          {playerWin() ? "Congratulations!!" : "Memory Game"}
         </Text>
       </View>
       <Text style={style.text}>Moves: {moves}</Text>
@@ -58,7 +61,7 @@ function Main() {
       {!playerWin() ? (
         <></>
       ) : (
-        <Pressable style={style.button} onPress={() => resetGame()}>
+        <Pressable style={style.button} onPress={resetGame()}>
           <Text style={{ color: "#fff" }}>Reset Game</Text>
         </Pressable>
       )}
@@ -97,7 +100,7 @@ const style = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
-    zIndex:10
+    zIndex: 10,
   },
   button: {
     backgroundColor: "#370073",
