@@ -7,9 +7,9 @@ function shuffleArray(array) {
   return array;
 }
 const cards = ["💋",
-//  "👀", 
-//  "🌺", 
-//  "🧸",
+ "👀", 
+ "🌺", 
+ "🧸",
   "🗽", 
   "🔥"];
 export const Context = createContext();
