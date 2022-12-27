@@ -1,16 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Pressable
-} from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import Constants from "expo-constants";
 import Cards from "./src/components/Cards";
 import { Context } from "./src/context/context";
 import ConfettiCannon from "react-native-confetti-cannon";
 
 function Main() {
+  let explosion;
   const {
     moves,
     setMoves,
@@ -20,7 +16,9 @@ function Main() {
     selectedCards,
     setSelectedCards,
   } = useContext(Context);
-  const playerWin = () => machedCards.length == boardCards.length;
+  const playerWin = () =>true // machedCards.length == boardCards.length
+  
+  
   useEffect(() => {
     if (selectedCards.length < 2) return;
     if (boardCards[selectedCards[0]] == boardCards[selectedCards[1]]) {
@@ -37,28 +35,22 @@ function Main() {
     setMachedCards([]);
     setMoves(0);
   };
-  useEffect(()=>{
-    console.log("renderizado")
-  },[])
+
   return (
     <View style={style.container}>
+      {playerWin() ? (<View style={style.containerconfetti}>
+        <ConfettiCannon
+          count={200}
+          origin={{ x: -10, y: 0 }}
+          explosionSpeed={200}
+          ref={(ref) => (explosion = ref)}
+        /></View >
+      ) : (
+        <></>
+      )}
       <View style={style.textContainer}>
         <Text style={style.title}>
-          {playerWin() ? (
-            <>
-              Congratulations!!
-
-                <ConfettiCannon
-                  count={200}
-                  origin={{ x: -10, y: 0 }}
-                  fadeOut={true}
-                  explosionSpeed={600}
-                />
-             
-            </>
-          ) : (
-            "Memory Game"
-          )}
+          {playerWin() ? <>Congratulations!!</> : "Memory Game"}
         </Text>
       </View>
       <Text style={style.text}>Moves: {moves}</Text>
@@ -105,7 +97,7 @@ const style = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
-    left: 0,
+    zIndex:10
   },
   button: {
     backgroundColor: "#370073",

@@ -6,7 +6,12 @@ function shuffleArray(array) {
   }
   return array;
 }
-const cards = ["💋", "👀", "🌺", "🧸", "🗽", "🔥"];
+const cards = ["💋",
+//  "👀", 
+//  "🌺", 
+//  "🧸",
+  "🗽", 
+  "🔥"];
 export const Context = createContext();
 export const ContextProvider = ({ children }) => {
   const [boardCards, setBoardCards] = useState(

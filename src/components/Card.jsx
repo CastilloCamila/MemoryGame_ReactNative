@@ -9,11 +9,11 @@ useEffect(()=>{
   console.log("renderizado")
 },[])
   const handleOnPress = (index) => {
-    requestAnimationFrame(() => {
+
        if (selectedCards.length >= 2 || selectedCards.includes(index)) return;
       setSelectedCards([...selectedCards, index]);
       setMoves(moves + 1);
-    });
+
   };
 
   return (
