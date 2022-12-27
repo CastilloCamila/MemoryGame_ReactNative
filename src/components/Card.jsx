@@ -4,7 +4,7 @@ import { Context } from "../context/context";
 
 function Card({ children, index, isTurnedOver }) {
   const animatedValue = useRef(new Animated.Value(0)).current;
-  const { setMoves, moves, setSelectedCards, selectedCards } =
+  const { setMoves, moves, setSelectedCards, selectedCards, matchedCards } =
     useContext(Context);
   useEffect(() => {
     console.log("renderizado");
@@ -38,7 +38,7 @@ if(!isTurnedOver){
     useNativeDriver: false,
   }).start();
 }
-},[selectedCards])
+},[selectedCards,matchedCards ])
   return (
     <View style={style.cardContainer}>
       <View style={style.cardInner}>

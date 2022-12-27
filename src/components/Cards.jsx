@@ -4,12 +4,12 @@ import { Context } from "../context/context";
 import Card from "./Card";
 
 function Cards() {
-  const { boardCards, selectedCards, machedCards } = useContext(Context);
+  const { boardCards, selectedCards, matchedCards } = useContext(Context);
   return (
     <View style={style.container}>
       {boardCards?.map((card, index) => {
         const isTurnedOver =
-          selectedCards.includes(index) || machedCards.includes(index);
+          selectedCards.includes(index) || matchedCards.includes(index);
         return (
           <Card key={index} index={index} isTurnedOver={isTurnedOver}>
             {card}
@@ -26,6 +26,7 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     marginVertical: 20,
+    zIndex:-1
   },
 });
 export default Cards;

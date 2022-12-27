@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, StyleSheet, Text, Pressable  } from "react-native";
 import Constants from "expo-constants";
 import Cards from "./src/components/Cards";
 import { Context } from "./src/context/context";
@@ -10,18 +10,18 @@ function Main() {
   const {
     moves,
     setMoves,
-    machedCards,
+    matchedCards,
     boardCards,
-    setMachedCards,
+    setmatchedCards,
     selectedCards,
     setSelectedCards,
   } = useContext(Context);
-  const playerWin = () => machedCards.length == boardCards.length;
+  const playerWin = () => matchedCards.length == boardCards.length;
 
   useEffect(() => {
     if (selectedCards.length < 2) return;
     if (boardCards[selectedCards[0]] == boardCards[selectedCards[1]]) {
-      setMachedCards([...machedCards, ...selectedCards]);
+      setmatchedCards([...matchedCards, ...selectedCards]);
       setSelectedCards([]);
     } else {
       const timeOut = setTimeout(() => {
@@ -32,8 +32,8 @@ function Main() {
   }, [selectedCards]);
 
   const resetGame = () => {
-    console.log("entre")
-    setMachedCards([]);
+    console.log("entre");
+    setmatchedCards([]);
     setMoves(0);
   };
 
@@ -58,13 +58,11 @@ function Main() {
       </View>
       <Text style={style.text}>Moves: {moves}</Text>
       <Cards />
-      {!playerWin() ? (
-        <></>
-      ) : (
-        <Pressable style={style.button} onPress={resetGame()}>
+      {playerWin()&& <Pressable style={style.button} onPress={()=>resetGame()}>
           <Text style={{ color: "#fff" }}>Reset Game</Text>
         </Pressable>
-      )}
+   
+      }
     </View>
   );
 }
@@ -95,14 +93,15 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   containerconfetti: {
-    height: "100%",
-    width: "100%",
+height:'100%',
+width:'100%',
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 10,
+
   },
   button: {
+    position:'relative',
     backgroundColor: "#370073",
     borderRadius: 4,
     padding: 10,

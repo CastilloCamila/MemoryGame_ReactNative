@@ -18,7 +18,7 @@ export const ContextProvider = ({ children }) => {
     shuffleArray([...cards, ...cards])
   );
 
-  const [machedCards, setMachedCards] = useState([]);
+  const [matchedCards, setmatchedCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [moves, setMoves] = useState(0);
   return (
@@ -26,8 +26,8 @@ export const ContextProvider = ({ children }) => {
       value={{
         boardCards,
         setBoardCards,
-        machedCards,
-        setMachedCards,
+        matchedCards,
+        setmatchedCards,
         selectedCards,
         setSelectedCards,
         moves,
