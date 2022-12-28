@@ -4,12 +4,12 @@
     "slug": "MemoryGame",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon_MemoryGame.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#190033"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,12 +22,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/icon_MemoryGame.png",
+        "backgroundColor": "#190033"
+      },
+      "package": "com.camilacastillo.MemoryGame"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon_MemoryGame.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fe62d49a-43d8-4b65-bdc5-803e70b21127"
+      }
     }
   }
 }
