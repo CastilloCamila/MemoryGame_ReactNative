@@ -4,6 +4,7 @@ import Constants from "expo-constants";
 import Cards from "./src/components/Cards";
 import { Context } from "./src/context/context";
 import ConfettiCannon from "react-native-confetti-cannon";
+import { StatusBar } from "expo-status-bar";
 
 function Main() {
   let explosion;
@@ -38,6 +39,7 @@ function Main() {
 
   return (
     <View style={style.container}>
+      <StatusBar style="light"/>
       {playerWin() ? (
         <View style={style.containerconfetti}>
           <ConfettiCannon
