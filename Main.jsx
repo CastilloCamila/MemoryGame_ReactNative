@@ -39,7 +39,7 @@ function Main() {
 
   return (
     <View style={style.container}>
-      <StatusBar style="light"/>
+      <StatusBar style="dark"/>
       {playerWin() ? (
         <View style={style.containerconfetti}>
           <ConfettiCannon

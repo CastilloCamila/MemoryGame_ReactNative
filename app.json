@@ -7,12 +7,12 @@
     "icon": "./assets/icon_MemoryGame.png",
     "userInterfaceStyle": "light",
     "splash": {
-
       "resizeMode": "contain",
       "backgroundColor": "#190033"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/fe62d49a-43d8-4b65-bdc5-803e70b21127"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -34,6 +34,9 @@
       "eas": {
         "projectId": "fe62d49a-43d8-4b65-bdc5-803e70b21127"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
